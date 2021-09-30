@@ -29,6 +29,11 @@ $this->section('title') ?> Login <?= $this->endSection()
                                         </div>
                                         <input type="text" name="id" id="id" class="form-control">
                                     </div>
+                                    <?php if (session()->getFlashdata('msg')) : ?>
+                                        <div>
+                                            <?= session()->getFlashdata('msg') ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
@@ -38,11 +43,6 @@ $this->section('title') ?> Login <?= $this->endSection()
                                     </button>
                                 </div>
                             </div>
-                            <?php if (session()->getFlashdata('msg')) : ?>
-                                <div class="mt-1">
-                                    <?= session()->getFlashdata('msg') ?>
-                                </div>
-                            <?php endif; ?>
                         </form>
                     </div>
                 </div>
