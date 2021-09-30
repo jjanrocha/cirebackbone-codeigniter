@@ -14,7 +14,7 @@ $this->section('title') ?> Login <?= $this->endSection()
                                 Login
                             </div>
                             <div class="col-4 d-flex justify-content-center">
-                                <img src="" height="88" width="84">
+                                <img src="<?php echo base_url(); ?>/img/logo.png" height="88" width="84">
                             </div>
                         </div>
                     </div>
