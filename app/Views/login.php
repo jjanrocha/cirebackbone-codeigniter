@@ -19,7 +19,7 @@ $this->section('title') ?> Login <?= $this->endSection()
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="<?php echo base_url(); ?>/login">
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-form-label">RE:</label>
                                 <div class="col-md-8">
@@ -38,6 +38,11 @@ $this->section('title') ?> Login <?= $this->endSection()
                                     </button>
                                 </div>
                             </div>
+                            <?php if (session()->getFlashdata('msg')) : ?>
+                                <div class="mt-1">
+                                    <?= session()->getFlashdata('msg') ?>
+                                </div>
+                            <?php endif; ?>
                         </form>
                     </div>
                 </div>

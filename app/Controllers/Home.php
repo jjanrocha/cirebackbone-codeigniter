@@ -6,6 +6,10 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('login');
+        if (session()->get('logado')) {
+            return view('home');
+        } else {
+            return view('login');
+        }
     }
 }
