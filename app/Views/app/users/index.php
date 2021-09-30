@@ -52,7 +52,7 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
                 "data": {
                     "_token": "{{ csrf_token() }}"
                 },
-                "url": "{{route('usuarios.listar')}}",
+                "url": "/listarUsuarios",
                 "type": "POST",
                 "datatype": "JSON",
                 "dataSrc": function(users) {

@@ -34,11 +34,18 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->post('/login', 'Login::logar');
 $routes->post('/logout', 'Login::logout');
+
+/** Links da sidebar */
 $routes->get('/carimbos/b2b', function(){ return view('fallback/manutencao'); });
 $routes->get('/carimbos/gerais', function(){ return view('fallback/manutencao'); });
 $routes->get('/carimbos/vivo2', function(){ return view('fallback/manutencao'); });
 $routes->get('/usuarios', 'UsuarioController::index', ['filter' => 'adminGuard']);
 $routes->get('/links', function(){ return view('fallback/manutencao'); });
+/** Fim dos links da sidebar */
+
+/** CRUD de usuários */
+$routes->post('/listarUsuarios', 'UsuarioController::listarUsuarios');
+/** Fim do CRUD de usuários */
 
 /*
  * --------------------------------------------------------------------
