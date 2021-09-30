@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/basico');
-$this->section('title') ?> Home <?= $this->endSection()
+$this->section('title') ?> Página em Manutenção <?= $this->endSection()
                                     ?>
 <?= $this->section('content') ?>
 

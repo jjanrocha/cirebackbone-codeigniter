@@ -35,6 +35,9 @@ $routes->get('/', 'Home::index');
 $routes->post('/login', 'Login::logar');
 $routes->post('/logout', 'Login::logout');
 $routes->get('/carimbos/b2b', function(){ return view('fallback/manutencao'); });
+$routes->get('/carimbos/gerais', function(){ return view('fallback/manutencao'); });
+$routes->get('/carimbos/vivo2', function(){ return view('fallback/manutencao'); });
+$routes->get('/links', function(){ return view('fallback/manutencao'); });
 
 /*
  * --------------------------------------------------------------------
