@@ -11,7 +11,7 @@ class Home extends BaseController
                 ['nome_usuario' => session()->get('nome'),
                 ['id_usuario' => session()->get('id')],
                 ['nivel_usuario' => session()->get('nivel')],
-        ]);
+            ]);
         
         } else {
             return view('login');

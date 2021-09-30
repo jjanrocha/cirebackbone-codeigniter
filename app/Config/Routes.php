@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->post('/login', 'Login::logar');
 $routes->post('/logout', 'Login::logout');
+$routes->get('/carimbos/b2b', function(){ return view('fallback/manutencao'); });
 
 /*
  * --------------------------------------------------------------------
