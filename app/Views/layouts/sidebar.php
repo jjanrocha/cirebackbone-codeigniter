@@ -24,7 +24,11 @@
             </ul>
             <li><a href=""><i class="fas fa-users sidebar-icon"></i> Usuários</a></li>
             <li><a href=""><i class="fas fa-link sidebar-icon"></i> Links</a></li>
-            <li><a href=""><i class="fas fa-sign-out-alt sidebar-icon"></i> Sair</a></li>
+            <li>
+                <a href="javascript:logout.submit()"><i class="fas fa-sign-out-alt sidebar-icon"></i> Sair</a>
+                <form name="logout" method="post" action="/logout">
+                </form>
+            </li>
         </ul>
     </div>
 </div>
