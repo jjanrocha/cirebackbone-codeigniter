@@ -21,6 +21,7 @@ class Login extends BaseController
         if ($data) {
             $session_data = [
                 'id' => $data['id'],
+                'nome' => $data['nome'],
                 'nivel' => $data['nivel'],
                 'logado' => TRUE
             ];
