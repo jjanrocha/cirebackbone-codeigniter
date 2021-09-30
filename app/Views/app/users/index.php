@@ -1,5 +1,6 @@
 <?= $this->extend('layouts/basico');
 $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?= $this->include('layouts/sidebar') ?>
@@ -13,7 +14,7 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
             <hr>
         </div>
         <div class="mb-3">
-            <a type="button" href="" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Novo usuário</a>
+            <a type="button" href="<?php echo(base_url('/'))?>/usuarios/create" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Novo usuário</a>
         </div>
         <?php if (session()->getFlashdata('msg')) : ?>
             <div>

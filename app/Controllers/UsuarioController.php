@@ -29,4 +29,8 @@ class UsuarioController extends BaseController
         $json_data = array('data' => $usuarios);
         echo json_encode($json_data);
     }
+
+    public function create() {
+        return view('app/users/create', ['title' => 'Cadastro de Usuário']);
+    }
 }
