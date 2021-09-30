@@ -25,8 +25,8 @@ class AdminGuard implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('logado') || !session()->get('nivel') == 'ADMINISTRADOR') {
-            return redirect()->to('/');
+        if (!session()->get('logado') || session()->get('nivel') != 'ADMINISTRADOR') {
+            return redirect()->to(base_url('/'));
         }
     }
 

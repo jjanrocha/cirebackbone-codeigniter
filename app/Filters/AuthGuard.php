@@ -26,7 +26,7 @@ class AuthGuard implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if (!session()->get('logado')) {
-            return redirect()->to('/');
+            return redirect()->to(base_url('/'));
         }
     }
 

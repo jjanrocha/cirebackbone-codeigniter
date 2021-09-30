@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/basico');
-$this->section('title') ?> Home <?= $this->endSection()
-                                    ?>
+$this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?= $this->include('layouts/sidebar') ?>
@@ -9,7 +9,7 @@ $this->section('title') ?> Home <?= $this->endSection()
 <div class="main" id="pagina">
 
     <div class="container">
-        <p>Olá, <?= $nome_usuario ?> </p>
+        <p>Olá, <?= session()->get('nome') ?> </p>
     </div>
 
 </div>

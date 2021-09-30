@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/basico');
-$this->section('title') ?> Login <?= $this->endSection()
-                                    ?>
+$this->section('title') ?> <?= $title ?> <?= $this->endSection()?>
+
 <?= $this->section('content') ?>
 
 <div class="background-gray90">
