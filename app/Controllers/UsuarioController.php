@@ -44,6 +44,16 @@ class UsuarioController extends BaseController
         if (!$this->validate($this->usuario->validationRules, $this->usuario->validationMessages)) {
             return redirect()->to(base_url() . "/usuarios/create")->withInput()->with('errors', $this->validator->getErrors());
         }
+
+        //inserção do usuário no banco de dados caso os campos digitados estejam dentro dos parâmetros
+        $this->usuario->save([
+            'id'  => $this->request->getVar('id'),
+            'nome' => mb_strtoupper($this->request->getVar('nome')),
+            'password' => password_hash($this->request->getVar('id'), PASSWORD_DEFAULT),
+            'nivel' => mb_strtoupper($this->request->getVar('nivel')),
+        ]);
+
+        return redirect()->to(base_url('/'));
     }
 
 }

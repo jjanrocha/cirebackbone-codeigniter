@@ -9,15 +9,15 @@ class Usuario extends Model
     protected $DBGroup              = 'default';
     protected $table                = 'cire_backbone_usuarios';
     protected $primaryKey           = 'id';
-    protected $useAutoIncrement     = true;
+    protected $useAutoIncrement     = false;
     protected $insertID             = 0;
     protected $returnType           = 'array';
-    protected $useSoftDeletes       = false;
+    protected $useSoftDeletes       = true;
     protected $protectFields        = true;
     protected $allowedFields        = ['id', 'nome', 'password', 'nivel'];
 
     // Dates
-    protected $useTimestamps        = false;
+    protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
     protected $createdField         = 'created_at';
     protected $updatedField         = 'updated_at';
