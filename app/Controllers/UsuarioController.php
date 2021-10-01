@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Usuario;
 use CodeIgniter\HTTP\Request;
+use Config\App;
+use CodeIgniter\RESTful\ResourceController;
+
 
 class UsuarioController extends BaseController
 {
@@ -30,7 +33,17 @@ class UsuarioController extends BaseController
         echo json_encode($json_data);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('app/users/create', ['title' => 'Cadastro de Usuário']);
     }
+
+    public function store()
+    {
+        //validação dos campos
+        if (!$this->validate($this->usuario->validationRules, $this->usuario->validationMessages)) {
+            return redirect()->to(base_url() . "/usuarios/create")->withInput()->with('errors', $this->validator->getErrors());
+        }
+    }
+
 }

@@ -46,6 +46,7 @@ $routes->get('/links', function(){ return view('fallback/manutencao'); });
 /** CRUD de usuários */
 $routes->post('/listarUsuarios', 'UsuarioController::listarUsuarios', ['filter' => 'adminGuard']);
 $routes->get('/usuarios/create', 'UsuarioController::create', ['filter' => 'adminGuard']);
+$routes->post('/usuarios/store', 'UsuarioController::store', ['filter' => 'adminGuard']);
 /** Fim do CRUD de usuários */
 
 /*
