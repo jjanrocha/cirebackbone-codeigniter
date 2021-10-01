@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/basico');
-$this->section('title') ?> <?= $title ?> <?= $this->endSection()?>
+$this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
@@ -27,13 +27,13 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection()?>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input type="text" name="id" id="id" class="form-control">
+                                        <input type="text" name="id" id="id" value="<?= old('id') ?>" class="form-control <?php if (session()->getFlashdata('msg')) : ?>is-invalid<?php endif ?>">
+                                        <?php if (session()->getFlashdata('msg')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session()->getFlashdata('msg') ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
-                                    <?php if (session()->getFlashdata('msg')) : ?>
-                                        <div>
-                                            <?= session()->getFlashdata('msg') ?>
-                                        </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

@@ -29,7 +29,7 @@ class Login extends BaseController
             return redirect()->to(base_url('/'));
         } else {
             $session->setFlashdata('msg', 'Usuário não localizado.');
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/'))->withInput();
         }
     }
 
