@@ -1,9 +1,9 @@
-@extends('layouts.basico')
-@section('title', $title)
+<?= $this->extend('layouts/basico');
+$this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
 
-@section('content')
+<?= $this->section('content') ?>
 
-@include('layouts.sidebar')
+<?= $this->include('layouts/sidebar') ?>
 
 <div class="main" id="pagina">
     <div class="container">
@@ -13,25 +13,27 @@
             <hr>
         </div>
         <div class="mb-3">
-            <a type="button" href="{{route('usuarios.index')}}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Lista de Usuários</a>
+            <a type="button" href="<?= base_url('/usuarios') ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Lista de Usuários</a>
         </div>
-        @if (Session::has('mensagem'))
-        {{Session::get('mensagem')}}
-        @endif
+        <?php if (session()->getFlashdata('msg')) : ?>
+            <div>
+                <?= session()->getFlashdata('msg') ?>
+            </div>
+        <?php endif; ?>
         <div>
-            <b>Nome: </b>{{$user->nome}}
-        </div>
-
-        <div>
-            <b>RE: </b>{{$user->id}}
+            <b>Nome: </b><?= $usuario['nome'] ?>
         </div>
 
         <div>
-            <b>Nível: </b>{{$user->nivel}}
+            <b>RE: </b><?= $usuario['id'] ?>
+        </div>
+
+        <div>
+            <b>Nível: </b><?= $usuario['nivel'] ?>
         </div>
 
         <div class="my-1">
-            <a type="button" href="{{route('usuarios.edit', ['user' => $user->id])}}" class="btn btn-info my-1"><i class="fas fa-edit"></i> Editar</a>
+            <a type="button" href="<?= base_url('/usuarios/edit/' . $usuario['id']) ?>" class="btn btn-info my-1"><i class="fas fa-edit"></i> Editar</a>
             <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#modalDeleteUsuario"><i class="fas fa-trash"></i> Remover</button>
         </div>
         <hr>
@@ -63,10 +65,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja excluir o usuário de RE {{ $user->id }}?
-                        <form id="form_deletar_usuario" method="post" action="{{route('usuarios.delete', ['user' => $user->id])}}">
-                            @method('DELETE')
-                            @csrf
+                        Tem certeza que deseja excluir o usuário de RE <?= $usuario['id'] ?>?
+                        <form id="form_deletar_usuario" method="post" action="<?= base_url('/usuarios/' . $usuario['id']) ?>">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="_method" value="DELETE" />
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -80,10 +82,12 @@
     </div>
 </div>
 
-@include('layouts.footer')
+<?= $this->include('layouts/footer') ?>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.11.2/dataRender/datetime.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+
 
 <script type="text/javascript">
     $('#atualizar-lista-atividades-usuarios').on('click', function() {
@@ -91,28 +95,35 @@
     });
 
     $(document).ready(function() {
+
+        var id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+
         $('#lista_atividades_usuarios').DataTable({
 
             "ajax": {
-                "data": {
-                    "_token": "{{ csrf_token() }}",
-                    "user": "{{Request::segment(2)}}"
-                },
-                "url": "{{ route('usuarios.listar_atividades') }}",
+                "url": "<?= base_url('/listar_atividades_usuario') ?>",
                 "type": "POST",
                 "datatype": "JSON",
+                "data": {
+                    id
+                },
                 "dataSrc": function(users_tasks) {
                     return users_tasks.data;
                 },
             },
-             "columns": [
-                { "data": "numero_ta",
-                  "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<a href='https://sigitm.vivo.com.br/app/app.jsp#TA=" + oData.numero_ta + "'target='_blank'>" + oData.numero_ta + "</a>");
+            "columns": [{
+                    "data": [0],
+                    "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html("<a href='https://sigitm.vivo.com.br/app/app.jsp#TA=" + oData[0] + "'target='_blank'>" + oData[0] + "</a>");
                     }
                 },
-                { "data": "tipo_carimbo" },
-                { "data": "data_hora", render: $.fn.dataTable.render.moment('YYYY-MM-DD HH:mm:ss', 'DD/MM/YYYY HH:mm:ss') }
+                {
+                    "data": [1]
+                },
+                {
+                    "data": [2],
+                    render: $.fn.dataTable.render.moment('YYYY-MM-DD HH:mm:ss', 'DD/MM/YYYY HH:mm:ss')
+                }
             ],
             "processing": true,
             language: {
@@ -123,7 +134,6 @@
             ]
         });
     });
-
 </script>
 
-@endsection
+<?= $this->endSection() ?>

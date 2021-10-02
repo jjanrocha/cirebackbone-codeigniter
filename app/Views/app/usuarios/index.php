@@ -50,9 +50,6 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
     $(document).ready(function() {
         $('#lista_usuarios').DataTable({
             "ajax": {
-                "data": {
-                    "_token": "{{ csrf_token() }}"
-                },
                 "url": "/listarUsuarios",
                 "type": "POST",
                 "datatype": "JSON",

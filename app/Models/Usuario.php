@@ -12,7 +12,7 @@ class Usuario extends Model
     protected $useAutoIncrement     = false;
     protected $insertID             = 0;
     protected $returnType           = 'array';
-    protected $useSoftDeletes       = true;
+    protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = ['id', 'nome', 'password', 'nivel'];
 

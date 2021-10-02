@@ -36,17 +36,31 @@ $routes->post('/login', 'Login::logar');
 $routes->post('/logout', 'Login::logout');
 
 /** Links da sidebar */
-$routes->get('/carimbos/b2b', function(){ return view('fallback/manutencao'); });
-$routes->get('/carimbos/gerais', function(){ return view('fallback/manutencao'); });
-$routes->get('/carimbos/vivo2', function(){ return view('fallback/manutencao'); });
+$routes->get('/carimbos/b2b', function () {
+    return view('fallback/manutencao');
+});
+$routes->get('/carimbos/gerais', function () {
+    return view('fallback/manutencao');
+});
+$routes->get('/carimbos/vivo2', function () {
+    return view('fallback/manutencao');
+});
 $routes->get('/usuarios', 'UsuarioController::index', ['filter' => 'adminGuard']);
-$routes->get('/links', function(){ return view('fallback/manutencao'); });
+
+$routes->get('/links', function () {
+    return view('fallback/manutencao');
+});
 /** Fim dos links da sidebar */
 
 /** CRUD de usuários */
 $routes->post('/listarUsuarios', 'UsuarioController::listarUsuarios', ['filter' => 'adminGuard']);
 $routes->get('/usuarios/create', 'UsuarioController::create', ['filter' => 'adminGuard']);
 $routes->post('/usuarios/store', 'UsuarioController::store', ['filter' => 'adminGuard']);
+$routes->get('/usuarios/(:num)', 'UsuarioController::show/$1', ['filter' => 'adminGuard']);
+$routes->post('/listar_atividades_usuario', 'UsuarioController::listarAtividadesUsuario', ['filter' => 'adminGuard']);
+$routes->get('/usuarios/edit/(:num)', 'UsuarioController::edit/$1', ['filter' => 'adminGuard']);
+$routes->put('/usuarios/(:num)', 'UsuarioController::update/$1', ['filter' => 'adminGuard']);
+$routes->delete('/usuarios/(:num)', 'UsuarioController::destroy/$1', ['filter' => 'adminGuard']);
 /** Fim do CRUD de usuários */
 
 /*
