@@ -39,6 +39,9 @@ $routes->post('/logout', 'Login::logout');
 $routes->get('/carimbos/b2b', function () {
     return view('fallback/manutencao');
 });
+
+$routes->get('/carimbos/controle', 'ControleController::index', ['filter' => 'authGuard']);
+
 $routes->get('/carimbos/gerais', function () {
     return view('fallback/manutencao');
 });
@@ -62,6 +65,18 @@ $routes->get('/usuarios/edit/(:num)', 'UsuarioController::edit/$1', ['filter' =>
 $routes->put('/usuarios/(:num)', 'UsuarioController::update/$1', ['filter' => 'adminGuard']);
 $routes->delete('/usuarios/(:num)', 'UsuarioController::destroy/$1', ['filter' => 'adminGuard']);
 /** Fim do CRUD de usuários */
+
+/** Caregar forms de carimbos */
+$routes->post('/carimbos/controle/formularios/controle_crise', 'ControleController::carregarFormCrise', ['filter' => 'authGuard']);
+$routes->post('/carimbos/controle/formularios/controle_urgente', 'ControleController::carregarFormUrgente', ['filter' => 'authGuard']);
+$routes->post('/carimbos/controle/formularios/controle_atualizacao_telegram', 'ControleController::carregarFormAtualizacaoTelegram', ['filter' => 'authGuard']);
+/** Fim do carregamento dos forms de carimbos */
+
+/* Insert de carimbos */
+$routes->post('/carimbos/controle/formularios/controle_crise/insert','ControleController::insertCarimboCrise', ['filter' => 'authGuard']);
+$routes->post('/carimbos/controle/formularios/controle_urgente/insert', 'ControleController::insertCarimboUrgente', ['filter' => 'authGuard']);
+$routes->post('/carimbos/controle/formularios/controle_atualizacao_telegram/insert','AtualizacaoTelegramController::store', ['filter' => 'authGuard']);
+/* Fim do insert de carimbos */
 
 /*
  * --------------------------------------------------------------------
