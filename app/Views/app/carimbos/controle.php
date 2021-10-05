@@ -50,7 +50,7 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
             var tipo_carimbo = $("input:radio[name ='tipo_atividade_id']:checked").val()
             $.ajax({
                 type: 'POST',
-                url: '<?= base_url("/carimbos/controle/formularios/")?>'+'/'+tipo_carimbo,
+                url: '<?= base_url("/carimbos/controle/formularios/") ?>' + '/' + tipo_carimbo,
                 success: function(form) {
                     $("#conteudo").html(form);
                 },
@@ -68,18 +68,24 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
         $.ajax({
             type: 'POST',
             data: dados,
-            url: '<?= base_url("/carimbos/controle/formularios/")?>'+'/'+tipo_carimbo+'/insert',
+            url: '<?= base_url("/carimbos/controle/formularios/") ?>' + '/' + tipo_carimbo + '/insert',
 
             success: function(response) {
-                $('input[name=tipo_atividade_id]').prop('checked', false);
-                var textarea_carimbo = document.createElement("TEXTAREA");
-                textarea_carimbo.className = "form-control col-md-8 mt-1";
-                textarea_carimbo.rows = 27;
-                textarea_carimbo.readOnly = true;
-                textarea_carimbo.innerHTML = response.carimbo;
-                $("#conteudo").html(textarea_carimbo);
+                if (response.carimbo) {
+                    $('input[name=tipo_atividade_id]').prop('checked', false);
+                    var textarea_carimbo = document.createElement("TEXTAREA");
+                    textarea_carimbo.className = "form-control col-md-8 mt-1";
+                    textarea_carimbo.rows = 27;
+                    textarea_carimbo.readOnly = true;
+                    textarea_carimbo.innerHTML = response.carimbo;
+                    $("#conteudo").html(textarea_carimbo);
+                } else {
+                    $.each(response.error, function(key, value) {
+                        alert(value)
+                    });
+                }
             },
-            
+
             error: function(xhr) {
                 $.each(xhr.responseJSON.errors, function(key, value) {
                     alert(value)
@@ -87,6 +93,5 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
             },
         });
     });
-
 </script>
 <?= $this->endSection() ?>
