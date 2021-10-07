@@ -192,9 +192,9 @@ class AtualizacaoTelegramController extends BaseController
         if ($atividade->operadoras != "") {
             $lista_operadoras = "";
 
-            if ($carimbo['afetacao'] == "" &&  $atividade->afetacao_voz == "" && $atividade->afetacao_speedy == "" && $atividade->afetacao_clientes == "" && count($atividade->operadoras) > 1) {
+            if ($carimbo['afetacao'] == "" && $atividade->erbs == "" && $atividade->afetacao_voz == "" && $atividade->afetacao_speedy == "" && $atividade->afetacao_clientes == "" && $atividade->afetacao_fttx == "" && $atividade->afetacao_iptv == "" && count($atividade->operadoras) > 1) {
                 $carimbo['afetacao'] .= " SWAPS - ";
-            } elseif ($carimbo['afetacao'] == "" && $atividade->afetacao_voz == "" && $atividade->afetacao_speedy == "" && $atividade->afetacao_clientes == "" && count($atividade->operadoras) == 1) {
+            } elseif ($carimbo['afetacao'] == "" && $atividade->erbs == "" && $atividade->afetacao_voz == "" && $atividade->afetacao_speedy == "" && $atividade->afetacao_clientes == "" && $atividade->afetacao_fttx == "" && $atividade->afetacao_iptv == "" && count($atividade->operadoras) == 1) {
                 $carimbo['afetacao'] .= " SWAP - ";
             } elseif ($carimbo['afetacao'] == !"") {
                 $carimbo['afetacao'] .= "/";
@@ -284,8 +284,8 @@ class AtualizacaoTelegramController extends BaseController
         $carimbo['horario_acionamento'] = $data_formatada;
 
         //TTMC
-        $carimbo['ttmc'] ="";
-        if($atividade->ttmc_numero != "") {
+        $carimbo['ttmc'] = "";
+        if ($atividade->ttmc_numero != "") {
             $carimbo['ttmc'] .= "\n\nTTMC - $atividade->ttmc_numero - Informe de Risco - $atividade->ttmc_tipo - $atividade->ttmc_rede";
         }
 
