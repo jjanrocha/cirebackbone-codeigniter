@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class AtualizacaoTelegram extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'cire_backbone_atualizacao_telegram';
+    protected $table                = 'cire_backbone_atualizacoes_telegram';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -36,7 +36,9 @@ class AtualizacaoTelegram extends Model
         'afetacao_iptv',
         'lp',
         'horario_acionamento',
-        'ttmc',
+        'ttmc_numero',
+        'ttmc_tipo',
+        'ttmc_rede',
         'status',
         'escalonamento'
     ];
