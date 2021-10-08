@@ -11,7 +11,7 @@
             </li>
             <?php if (session()->get('nivel') == 'ADMINISTRADOR') : ?>
                 <li>
-                    <a href=""><i class="fa fa-tachometer-alt sidebar-icon"></i> Dashboard</a>
+                    <a href="<?php echo (base_url('/')) ?>/dashboard"><i class="fa fa-tachometer-alt sidebar-icon"></i> Dashboard</a>
                 </li>
             <?php endif; ?>
             <li data-toggle="collapse" data-target="#carimbos" class="collapsed">

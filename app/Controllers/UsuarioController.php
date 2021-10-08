@@ -94,6 +94,21 @@ class UsuarioController extends BaseController
             }
         }
 
+        $builder = $db->table('cire_backbone_atualizacoes_telegram');
+        $builder->select('numero_ta, data_hora');
+        $builder->where('usuario_id', $id);
+        $atividades = $builder->get()->getResultArray();
+
+        if (count($atividades) > 0) {
+            foreach ($atividades as $atividade) {
+                $result[] = [
+                    $atividade['numero_ta'],
+                    $atividade['tipo_carimbo'] = 'ATUALIZAÇÃO TELEGRAM',
+                    $atividade['data_hora'],
+                ];
+            }
+        }
+
         $json_data = array('data' => $result);
         return $this->response->setJSON($json_data);
     }
