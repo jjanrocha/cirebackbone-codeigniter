@@ -212,6 +212,9 @@
             predefinicao_status = 'STATUS: Equipe recuperando falha.\nCausa raiz: \nPrevisão para testes de encerramento: '
         } else if ($('#tipo_status').val() == 'testes') {
             var ary = [];
+            if ($("#possui_draco").val() == "sim") {
+                ary.push('DRACO');
+            }
             $('#lista_equipamentos_v1_to').children().each(function() {
                 ary.push($(this).val() + ' (VIVO 1)');
             });
@@ -226,7 +229,7 @@
             }
             predefinicao_status = 'STATUS: Evento em testes.\n\nResumo dos Testes:';
 
-            $.each(ary, function(key, value){
+            $.each(ary, function(key, value) {
                 predefinicao_status = predefinicao_status.concat('\n' + value + ': ')
             })
         } else if ($('#tipo_status').val() == 'tramitacao_outra_area') {
