@@ -205,37 +205,40 @@ $(document).ready(function(){
                     $('#possui_draco').prop('checked', true);
                 }
 
-                $("#lista_equipamentos_v1_to option").remove();
                 if (response.equipamentos_v1 != "") {
                     $.each(response.equipamentos_v1, function(key, value) {
-                        $("#lista_equipamentos_v1_to").append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
+                        if ($("#lista_equipamentos_v1_to option[value=\"" + value + "\"]").length == 0) {
+                            $("#lista_equipamentos_v1_to").append($('<option>', {
+                                value: value,
+                                text: value
+                            }));
+                        }
                         $("#lista_equipamentos_v1 option[value=\"" + value + "\"]").remove();
                     });
                 }
 
-                $("#lista_equipamentos_v2_to option").remove();
                 if (response.equipamentos_v2 != "") {
                     $.each(response.equipamentos_v2, function(key, value) {
-                        $("#lista_equipamentos_v2_to").append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
+                        if ($("#lista_equipamentos_v2_to option[value=\"" + value + "\"]").length == 0) {
+                            $("#lista_equipamentos_v2_to").append($('<option>', {
+                                value: value,
+                                text: value
+                            }));
+                        }
                         $("#lista_equipamentos_v2 option[value=\"" + value + "\"]").remove();
                     });
                 }
 
                 $("#redundancias_v2").val(response.redundancias_v2);
 
-                $("#lista_operadoras_to option").remove();
                 if (response.operadoras != "") {
                     $.each(response.operadoras, function(key, value) {
-                        $("#lista_operadoras_to").append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
+                        if ($("#lista_equipamentos_v2_to option[value=\"" + value + "\"]").length == 0) {
+                            $("#lista_operadoras_to").append($('<option>', {
+                                value: value,
+                                text: value
+                            }));
+                        }
                         $("#lista_operadoras option[value=\"" + value + "\"]").remove();
                     });
                 }
