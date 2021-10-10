@@ -40,7 +40,8 @@ class AtualizacaoTelegram extends Model
         'ttmc_tipo',
         'ttmc_rede',
         'status',
-        'escalonamento'
+        'escalonamento',
+        'tipo_status'
     ];
 
     // Dates

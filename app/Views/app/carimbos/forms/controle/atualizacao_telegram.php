@@ -145,10 +145,22 @@
             </select>
         </div>
 
-
         <div class="mt-2">
-            <label class="col-form-label">Status:</label>
-            <textarea class="form-control col-md-10" rows="6" name="status" id="status" required></textarea>
+            <div class="form-group row">
+                <label class="col-form-label col-md-auto">Status:</label>
+                <select class="custom-select col-lg-5" name="tipo_status" id="tipo_status" required>
+                    <option value="" disabled selected>Tipo de Status</option>
+                    <option value="agendamento">Agendamento</option>
+                    <option value="em_deslocamento">Em deslocamento para medições</option>
+                    <option value="percorrendo_rota_localizar_falha">Percorrendo rota para localizar falha</option>
+                    <option value="percorrendo_rota_retirar_atenuacao">Percorrendo rota para retirar atenuações</option>
+                    <option value="recuperando_falha">Recuperando falha</option>
+                    <option value="testes">Testes</option>
+                    <option value="tramitacao_outra_area">Tramitação (outra área)</option>
+                    <option value="tramitacao_area_vivo">Tramitação (área Vivo)</option>
+                </select>
+            </div>
+            <textarea class="form-control col-md-10" rows="8" name="status" id="status" required>STATUS: </textarea>
         </div>
 
         <div class="form-group row mt-2">
@@ -164,16 +176,13 @@
 </div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>/js/multiselect.min.js"></script>
-
-<!--
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>/js/jquery.mask.min.js"></script>
 
 <script>
-$(document).ready(function(){
-  $('#ttmc_numero').mask('0.000/0000');
-});
+    $(document).ready(function() {
+        $('#ttmc_numero').mask('0.000/0000');
+    });
 </script>
--->
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -181,6 +190,54 @@ $(document).ready(function(){
         $('#lista_equipamentos_v2').multiselect();
         $('#lista_operadoras').multiselect();
     });
+</script>
+
+<script type="text/javascript">
+    $(document).on('change', '#tipo_status', function(event) {
+        event.preventDefault()
+
+        $('#status').empty()
+
+        var predefinicao_status = ''
+
+        if ($('#tipo_status').val() == 'agendamento') {
+            predefinicao_status = 'STATUS: TA em agendamento.\nMotivo: \nPróxima atualização: '
+        } else if ($('#tipo_status').val() == 'em_deslocamento') {
+            predefinicao_status = 'STATUS: Equipe em deslocamento.\nLocalidade: \nPrevisão de chegada: '
+        } else if ($('#tipo_status').val() == 'percorrendo_rota_localizar_falha') {
+            predefinicao_status = 'STATUS: Equipe percorrendo rota para localizar a falha.\nPróxima atualização: '
+        } else if ($('#tipo_status').val() == 'percorrendo_rota_retirar_atenuacao') {
+            predefinicao_status = 'STATUS: Equipe percorrendo rota para a retirada de atenuações.\nPróxima atualização: '
+        } else if ($('#tipo_status').val() == 'recuperando_falha') {
+            predefinicao_status = 'STATUS: Equipe recuperando falha.\nCausa raiz: \nPrevisão para testes de encerramento: '
+        } else if ($('#tipo_status').val() == 'testes') {
+            var ary = [];
+            $('#lista_equipamentos_v1_to').children().each(function() {
+                ary.push($(this).val() + ' (VIVO 1)');
+            });
+            $('#lista_equipamentos_v2_to').children().each(function() {
+                ary.push($(this).val() + ' (VIVO 2)');
+            });
+            $('#lista_operadoras_to').children().each(function() {
+                ary.push($(this).val());
+            });
+            if ($("#redundancias_v2").val() != "") {
+                ary.push($("#redundancias_v2").val() + ' redundância(s) VIVO 2');
+            }
+            predefinicao_status = 'STATUS: Evento em testes.\n\nResumo dos Testes:';
+
+            $.each(ary, function(key, value){
+                predefinicao_status = predefinicao_status.concat('\n' + value + ': ')
+            })
+        } else if ($('#tipo_status').val() == 'tramitacao_outra_area') {
+            predefinicao_status = 'STATUS: TRAMITAÇÃO PARA OUTRA ÁREA\nObs: '
+        } else if ($('#tipo_status').val() == 'tramitacao_area_vivo') {
+            predefinicao_status = 'STATUS: TRAMITAÇÃO ENTRE ÁREAS VIVO\nObs: '
+        }
+
+        $('#status').html(predefinicao_status)
+
+    })
 </script>
 
 <script type="text/javascript">
@@ -233,7 +290,7 @@ $(document).ready(function(){
 
                 if (response.operadoras != "") {
                     $.each(response.operadoras, function(key, value) {
-                        if ($("#lista_equipamentos_v2_to option[value=\"" + value + "\"]").length == 0) {
+                        if ($("#lista_operadoras_to option[value=\"" + value + "\"]").length == 0) {
                             $("#lista_operadoras_to").append($('<option>', {
                                 value: value,
                                 text: value
@@ -257,7 +314,8 @@ $(document).ready(function(){
                     $("#ttmc_tipo").val(response.ttmc_tipo);
                     $("#ttmc_rede").val(response.ttmc_rede);
                 }
-                //$("#status").val(response.status);
+                $("#tipo_status").val(response.tipo_status);
+                $("#status").html(response.status);
                 $("#escalonamento").val(response.escalonamento);
             }
         });

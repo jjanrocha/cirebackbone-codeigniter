@@ -72,7 +72,8 @@ class AtualizacaoTelegramController extends BaseController
             'ttmc_tipo' => $this->request->getVar('ttmc_tipo'),
             'ttmc_rede' => $this->request->getVar('ttmc_rede'),
             'status' => $this->request->getVar('status'),
-            'escalonamento' => $this->request->getVar('escalonamento')
+            'escalonamento' => $this->request->getVar('escalonamento'),
+            'tipo_status' => $this->request->getVar('tipo_status')
         ]);
 
         //Atribuir valores ao objeto
@@ -290,7 +291,7 @@ class AtualizacaoTelegramController extends BaseController
         }
 
         //Status
-        $carimbo['status'] = "\n\nSTATUS: $atividade->status";
+        $carimbo['status'] = "\n\n$atividade->status";
 
         //Escalonamento
         $carimbo['escalonamento'] = "\n\nESCALONAMENTO: $atividade->escalonamento";
@@ -303,15 +304,6 @@ class AtualizacaoTelegramController extends BaseController
 
     public function carregarDados()
     {
-        /*
-        $db      = \Config\Database::connect();
-        $builder = $db->table('cire_backbone_atualizacoes_telegram');
-        $builder->select('*');
-        $builder->where('numero_ta', $_POST['numero_ta']);
-        $builder->orderBy('data_hora', 'DESC');
-        $builder->limit(1);
-        $response = $builder->get()->getResultArray();
-        */
 
         $atividade = new AtualizacaoTelegram();
 
