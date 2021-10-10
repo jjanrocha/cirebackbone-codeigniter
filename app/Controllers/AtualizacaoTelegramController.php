@@ -300,4 +300,27 @@ class AtualizacaoTelegramController extends BaseController
 
         return $this->response->setJSON($carimbo);
     }
+
+    public function carregarDados()
+    {
+        /*
+        $db      = \Config\Database::connect();
+        $builder = $db->table('cire_backbone_atualizacoes_telegram');
+        $builder->select('*');
+        $builder->where('numero_ta', $_POST['numero_ta']);
+        $builder->orderBy('data_hora', 'DESC');
+        $builder->limit(1);
+        $response = $builder->get()->getResultArray();
+        */
+
+        $atividade = new AtualizacaoTelegram();
+
+        $response = $atividade->where('numero_ta', $_POST['numero_ta'])->orderBy('data_hora', 'DESC')->first();
+
+        $response['equipamentos_v1'] = explode(',', $response['equipamentos_v1']);
+        $response['equipamentos_v2'] = explode(',', $response['equipamentos_v2']);
+        $response['operadoras'] = explode(',', $response['operadoras']);
+
+        return $this->response->setJSON($response);
+    }
 }

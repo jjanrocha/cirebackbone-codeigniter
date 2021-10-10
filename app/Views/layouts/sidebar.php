@@ -22,7 +22,7 @@
                 <li><a href="<?php echo (base_url('/')) ?>/carimbos/controle"><i class="fa fa-angle-right"></i> Controle </a></li>
                 <li><a href="<?php echo (base_url('/')) ?>/carimbos/gerais"><i class="fa fa-angle-right"></i> Gerais <small><i class="fa fa-external-link"></i></small></a></li>
                 <li><a href="<?php echo (base_url('/')) ?>/carimbos/vivo2"><i class="fa fa-angle-right"></i> Vivo2 <small><i class="fa fa-external-link"></i></small></a></li>
-                <li><a href="https://inmetacode.com.br/carimbo_swap/" target="blank"><i class="fa fa-angle-right"></i> SWAP (abertura) <small><i class="fa fa-external-link"></i></small></a></li>
+                <li><a href="https://inmetacode.com.br/carimbo_swap/" target="blank"><i class="fa fa-angle-right"></i> SWAP <small><i class="fa fa-external-link"></i></small></a></li>
             </ul>
             <?php if (session()->get('nivel') == 'ADMINISTRADOR') : ?>
                 <li><a href="<?php echo (base_url('/')) ?>/usuarios"><i class="fas fa-users sidebar-icon"></i> Usuários</a></li>

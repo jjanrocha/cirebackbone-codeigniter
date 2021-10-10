@@ -63,11 +63,15 @@ $routes->post('/carimbos/controle/formularios/controle_urgente', 'ControleContro
 $routes->post('/carimbos/controle/formularios/controle_atualizacao_telegram', 'ControleController::carregarFormAtualizacaoTelegram', ['filter' => 'authGuard']);
 /** Fim do carregamento dos forms de carimbos */
 
-/* Insert de carimbos */
+/** Insert de carimbos */
 $routes->post('/carimbos/controle/formularios/controle_crise/insert','ControleController::insertCarimboCrise', ['filter' => 'authGuard']);
 $routes->post('/carimbos/controle/formularios/controle_urgente/insert', 'ControleController::insertCarimboUrgente', ['filter' => 'authGuard']);
 $routes->post('/carimbos/controle/formularios/controle_atualizacao_telegram/insert','AtualizacaoTelegramController::store', ['filter' => 'authGuard']);
 /* Fim do insert de carimbos */
+
+/** Carregar carimbo Atualização Telegram (controle) */
+$routes->post('/carimbos/controle/formularios/controle_atualizacao_telegram/read', 'AtualizacaoTelegramController::carregarDados', ['filter' => 'authGuard']);
+/** Fim carregar carimbo Atualização Telegram (controle)*/
 
 /** CRUD de usuários */
 $routes->post('/listarUsuarios', 'UsuarioController::listarUsuarios', ['filter' => 'adminGuard']);

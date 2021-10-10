@@ -5,12 +5,12 @@
         <?= csrf_field() ?>
 
         <div class="form-inline">
-            <input type="text" name="numero_ta" class="form-control" placeholder="Digite o TA" required>
-            <!-- <button type="button" id="pesquisar_ta" class="btn btn-secondary ml-1">Carregar</button> -->
+            <input type="text" name="numero_ta" id="numero_ta" class="form-control" placeholder="Digite o TA" required>
+            <button type="button" id="pesquisar_ta" class="btn btn-secondary ml-1">Carregar</button>
         </div>
 
         <div class="form-inline">
-            <select class="custom-select my-1 mr-sm-2" name="tipo_bilhete" required>
+            <select class="custom-select my-1 mr-sm-2" name="tipo_bilhete" id="tipo_bilhete" required>
                 <option value="" disabled selected>Tipo de Bilhete</option>
                 <option value="NACIONAL VIVO 1">NACIONAL V1</option>
                 <option value="NACIONAL VIVO 2">NACIONAL V2</option>
@@ -21,22 +21,22 @@
 
         <div class="form-inline row mt-1">
             <label class="col-form-label col-md-1">Rota:</label>
-            <input type="text" class="form-control mr-lg-1 col-lg-3" name="rota_ponta_a" placeholder="Ponta A" required>
+            <input type="text" class="form-control mr-lg-1 col-lg-3" name="rota_ponta_a" id="rota_ponta_a" placeholder="Ponta A" required>
             <label class="col-form-label col-md-auto">X</label>
-            <input type="text" class="form-control mr-lg-1 col-lg-3" name="rota_ponta_b" placeholder="Ponta B">
+            <input type="text" class="form-control mr-lg-1 col-lg-3" name="rota_ponta_b" id="rota_ponta_b" placeholder="Ponta B">
             <i class="fas fa-question-circle" title='Caso possua apenas uma informação, digite no campo "Ponta A" e deixe o campo "Ponta B" vazio.'></i>
         </div>
 
         <div class="form-inline row mt-1">
             <label class="col-form-label col-md-1">Trecho:</label>
-            <input type="text" class="form-control mr-lg-1 col-lg-3" name="trecho_ponta_a" placeholder="Ponta A" required>
+            <input type="text" class="form-control mr-lg-1 col-lg-3" name="trecho_ponta_a" id="trecho_ponta_a" placeholder="Ponta A" required>
             <label class="col-form-label col-md-auto">X</label>
-            <input type="text" class="form-control mr-lg-1 col-lg-3" name="trecho_ponta_b" placeholder="Ponta B">
+            <input type="text" class="form-control mr-lg-1 col-lg-3" name="trecho_ponta_b" id="trecho_ponta_b" placeholder="Ponta B">
             <i class="fas fa-question-circle" title='Caso possua apenas uma informação, digite no campo "Ponta A" e deixe o campo "Ponta B" vazio.'></i>
         </div>
 
         <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" name="possui_draco" value="sim" id="possui_draco">
+            <input class="form-check-input" type="checkbox" name="possui_draco" id="possui_draco" value="sim">
             <label class="form-check-label" for="possui_draco">
                 Possui DRACO afetado
             </label>
@@ -112,16 +112,16 @@
         </div>
 
         <div class="form-inline">
-            <input type="text" name="afetacao_erbs" class="form-control mt-2 mr-1 col-md-2" placeholder="ERB">
-            <input type="text" name="afetacao_voz" class="form-control mt-2 mr-1 col-md-2" placeholder="Voz">
-            <input type="text" name="afetacao_speedy" class="form-control mt-2 mr-1 col-md-2" placeholder="Speedy">
-            <input type="text" name="afetacao_clientes" class="form-control mt-2 mr-1 col-md-2" placeholder="Clientes">
-            <input type="text" name="afetacao_fttx" class="form-control mt-2 mr-1 col-md-2" placeholder="FTTX">
-            <input type="text" name="afetacao_iptv" class="form-control mt-2 mr-1 col-md-2" placeholder="IPTV">
+            <input type="text" name="afetacao_erbs" id="afetacao_erbs" class="form-control mt-2 mr-1 col-md-2" placeholder="ERB">
+            <input type="text" name="afetacao_voz" id="afetacao_voz" class="form-control mt-2 mr-1 col-md-2" placeholder="Voz">
+            <input type="text" name="afetacao_speedy" id="afetacao_speedy" class="form-control mt-2 mr-1 col-md-2" placeholder="Speedy">
+            <input type="text" name="afetacao_clientes" id="afetacao_clientes" class="form-control mt-2 mr-1 col-md-2" placeholder="Clientes">
+            <input type="text" name="afetacao_fttx" id="afetacao_fttx" class="form-control mt-2 mr-1 col-md-2" placeholder="FTTX">
+            <input type="text" name="afetacao_iptv" id="afetacao_iptv" class="form-control mt-2 mr-1 col-md-2" placeholder="IPTV">
         </div>
 
         <div class="form-group form-inline mt-2">
-            <input type="text" name="lp" class="form-control mt-2 col-md-7" placeholder="LP">
+            <input type="text" name="lp" id="lp" class="form-control mt-2 col-md-7" placeholder="LP">
             <i class="fas fa-question-circle ml-lg-1" title='Caso haja afetação de LP, digite o nome do cliente.'></i>
         </div>
 
@@ -129,23 +129,17 @@
             <label class="col-form-label col-md-auto" for="horario_acionamento">Horário do Acionamento (EPS):</label>
             <input type="datetime-local" class="form-control mr-lg-1 col-lg-3" name="horario_acionamento" id="horario_acionamento" required>
         </div>
-        <!--
-        <div class="form-group form-inline mt-2">
-            <input type="text" name="ttmc" class="form-control mt-2 col-md-10" placeholder="TTMC">
-            <i class="fas fa-question-circle ml-lg-1" title='Caso haja TTMC envolvido, descreva-o no campo ao lado.'></i>
-        </div>
-        -->
 
         <div class="form-group row mt-2">
             <label class="col-form-label col-md-auto">TTMC:</label>
             <input type="text" class="form-control mr-lg-1 col-lg-2" name="ttmc_numero" id="ttmc_numero" placeholder="Número">
-            <select class="form-control mr-lg-1 col-lg-3" name="ttmc_tipo">
+            <select class="form-control mr-lg-1 col-lg-3" name="ttmc_tipo" id="ttmc_tipo">
                 <option value="" selected disabled>Tipo</option>
                 <option value="Backbone Nacional">Backbone Nacional</option>
                 <option value="Backbone Regional">Backbone Regional</option>
             </select>
-            <select class="form-control col-lg-3" name="ttmc_rede">
-            <option value="" selected disabled>Rede</option>
+            <select class="form-control col-lg-3" name="ttmc_rede" id="ttmc_rede">
+                <option value="" selected disabled>Rede</option>
                 <option value="Rede Móvel">Rede Móvel</option>
                 <option value="Rede Fixa">Rede Fixa</option>
             </select>
@@ -154,12 +148,12 @@
 
         <div class="mt-2">
             <label class="col-form-label">Status:</label>
-            <textarea class="form-control col-md-10" rows="6" name="status" required></textarea>
+            <textarea class="form-control col-md-10" rows="6" name="status" id="status" required></textarea>
         </div>
 
         <div class="form-group row mt-2">
             <label class="col-form-label col-md-auto">Escalonamento:</label>
-            <input type="text" class="form-control mr-lg-1 col-lg-5" name="escalonamento" required>
+            <input type="text" class="form-control mr-lg-1 col-lg-5" name="escalonamento" id="escalonamento" required>
         </div>
 
         <button type="submit" id="btnEnviar" class="btn btn-success my-1">Gerar Carimbo</button>
@@ -190,6 +184,84 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
+    $(document).on('click', '#pesquisar_ta', function(event) {
+        event.preventDefault()
+        var numero_ta = $('#numero_ta').val()
+        $.ajax({
+            type: 'POST',
+            data: {
+                'numero_ta': numero_ta
+            },
+            dataType: "json",
+            url: '<?= base_url("/carimbos/controle/formularios/controle_atualizacao_telegram/read") ?>',
+            success: function(response) {
+                $('#tipo_bilhete').val(response.tipo_bilhete);
+                $("#rota_ponta_a").val(response.rota_ponta_a);
+                $("#rota_ponta_b").val(response.rota_ponta_b);
+                $("#trecho_ponta_a").val(response.trecho_ponta_a);
+                $("#trecho_ponta_b").val(response.trecho_ponta_b);
+
+                if (response.possui_draco == "sim") {
+                    $('#possui_draco').prop('checked', true);
+                }
+
+                $("#lista_equipamentos_v1_to option").remove();
+                if (response.equipamentos_v1 != "") {
+                    $.each(response.equipamentos_v1, function(key, value) {
+                        $("#lista_equipamentos_v1_to").append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                        $("#lista_equipamentos_v1 option[value=\"" + value + "\"]").remove();
+                    });
+                }
+
+                $("#lista_equipamentos_v2_to option").remove();
+                if (response.equipamentos_v2 != "") {
+                    $.each(response.equipamentos_v2, function(key, value) {
+                        $("#lista_equipamentos_v2_to").append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                        $("#lista_equipamentos_v2 option[value=\"" + value + "\"]").remove();
+                    });
+                }
+
+                $("#redundancias_v2").val(response.redundancias_v2);
+
+                $("#lista_operadoras_to option").remove();
+                if (response.operadoras != "") {
+                    $.each(response.operadoras, function(key, value) {
+                        $("#lista_operadoras_to").append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                        $("#lista_operadoras option[value=\"" + value + "\"]").remove();
+                    });
+                }
+
+                $("#afetacao_erbs").val(response.afetacao_erbs);
+                $("#afetacao_voz").val(response.afetacao_voz);
+                $("#afetacao_speedy").val(response.afetacao_speedy);
+                $("#afetacao_clientes").val(response.afetacao_clientes);
+                $("#afetacao_fttx").val(response.afetacao_fttx);
+                $("#afetacao_iptv").val(response.afetacao_iptv);
+                $("#lp").val(response.lp);
+                $("#horario_acionamento").val(response.horario_acionamento);
+
+                if (response.ttmc_numero != "") {
+                    $("#ttmc_numero").val(response.ttmc_numero);
+                    $("#ttmc_tipo").val(response.ttmc_tipo);
+                    $("#ttmc_rede").val(response.ttmc_rede);
+                }
+                //$("#status").val(response.status);
+                $("#escalonamento").val(response.escalonamento);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
     $(document).on('submit', '#form_atualizacao_telegram', function(event) {
         event.preventDefault()
         var dados = $(this).serialize()
@@ -216,7 +288,7 @@ $(document).ready(function(){
                     response.horario_acionamento +
                     response.ttmc +
                     response.status +
-                    response.escalonamento+
+                    response.escalonamento +
                     response.analista_cire
                 );
                 $("#conteudo").html(textarea_carimbo);
