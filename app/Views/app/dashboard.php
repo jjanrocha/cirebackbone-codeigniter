@@ -27,7 +27,11 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
     <div class="tab-content">
 
       <div class="tab-pane active" id="dashboard_geral" role="tabpanel" aria-labelledby="dashboard_geral-tab">
-        <div id="piechart" style="height:450px"></div>
+        <!-- <i class="fas fa-redo mt-2" id="atualizar-grafico-geral" onclick="drawChart()" title="Atualizar"></i> -->
+        <div class="mt-2">
+          <button class="btn btn-secondary" onclick="drawChart()"><i class="fas fa-redo"></i> Atualizar</button>
+        </div>
+        <div id="piechart"></div>
       </div>
 
       <div class="tab-pane" id="dashboard_operacao" role="tabpanel" aria-labelledby="dashboard_operacao-tab">
@@ -47,46 +51,36 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
 
 <script type="text/javascript" src="<?= base_url('js/loader.js') ?>"></script>
 
-
 <script type="text/javascript">
-  $(document).ready(function() {
-    var response = []
-    google.charts.load('current', {
-      'packages': ['corechart']
-    });
-    //google.charts.setOnLoadCallback(drawChart);
+  // Load the Visualization API and the piechart package.
+  google.charts.load('current', {
+    'packages': ['corechart']
+  });
 
-    $.ajax({
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var jsonData = $.ajax({
       type: "POST",
       url: "<?= base_url('/') ?>/dashboard/geral",
-      dataType: 'json',
+      dataType: "json",
+      async: false
+    }).responseText;
 
-      success: function(response) {
-        drawChart(response)
-      }
-    })
+    // Create our data table out of JSON data loaded from server.
+    var data = new google.visualization.DataTable(jsonData);
 
-    function drawChart(response) {
-
-      var data = google.visualization.arrayToDataTable([
-        ['Tipo de atividade', 'Total'],
-        ['Escalonamento Crise', response.total_escalonamento_crise],
-        ['Escalonamento Urgente', response.total_escalonamento_urgente],
-        ['Atualização Telegram', response.total_atualizacao_telegram],
-      ]);
-
-      var options = {
-        title: 'Atividades'
-      };
-
-      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-      chart.draw(data, options);
-    }
-
-    $(window).resize(function() {
-      drawChart();
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, {
+      //width: 600,
+      height: 400
     });
+  }
+
+  $(window).resize(function() {
+    drawChart();
   });
 </script>
 

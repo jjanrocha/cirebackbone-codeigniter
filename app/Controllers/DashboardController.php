@@ -36,13 +36,23 @@ class DashboardController extends BaseController
         /** Total de registros (todas as atividades) */
         $total_atividades = $total_escalonamento_crise + $total_escalonamento_urgente + $total_atualizacao_telegram;
 
-        $data = [
-            'total_escalonamento_crise' => $total_escalonamento_crise,
-            'total_escalonamento_urgente' => $total_escalonamento_urgente,
-            'total_atualizacao_telegram' => $total_atualizacao_telegram,
-            'total_atividades' => $total_atividades
+        $data['cols'] = [
+            array('id' => '', 'label' => 'Topping', 'pattern' => "", 'type' => "string"),
+            array('id' => '', 'label' => 'Slices', 'pattern' => "", 'type' => "number")
         ];
 
-        echo json_encode($data);
+        $data['rows'] = [
+            array('c' => [
+                array('v' => 'Escalonamento Crise', 'f' => null), array('v' => $total_escalonamento_crise, 'f' => null)
+            ]),
+            array('c' => [
+                array('v' => 'Escalonamento Urgente', 'f' => null), array('v' => $total_escalonamento_urgente, 'f' => null)
+            ]),
+            array('c' => [
+                array('v' => 'Atualização Telegram', 'f' => null), array('v' => $total_atualizacao_telegram, 'f' => null)
+            ])
+        ];
+
+        return $this->response->setJSON($data);
     }
 }
