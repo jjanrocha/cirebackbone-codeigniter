@@ -212,7 +212,7 @@
             predefinicao_status = 'STATUS: Equipe recuperando falha.\nCausa raiz: \nPrevisão para testes de encerramento: '
         } else if ($('#tipo_status').val() == 'testes') {
             var ary = [];
-            if ($("#possui_draco").val() == "sim") {
+            if ($("#possui_draco").is(':checked')) {
                 ary.push('DRACO');
             }
             $('#lista_equipamentos_v1_to').children().each(function() {

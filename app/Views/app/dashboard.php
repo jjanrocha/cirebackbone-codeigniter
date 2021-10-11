@@ -45,51 +45,49 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
 
 <?= $this->include('layouts/footer') ?>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="<?= base_url('js/loader.js') ?>"></script>
 
 
 <script type="text/javascript">
+  $(document).ready(function() {
+    var response = []
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    //google.charts.setOnLoadCallback(drawChart);
 
-$(document).ready(function() {
-  var response = []
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
-  //google.charts.setOnLoadCallback(drawChart);
+    $.ajax({
+      type: "POST",
+      url: "<?= base_url('/') ?>/dashboard/geral",
+      dataType: 'json',
 
-  $.ajax({
-    type: "POST",
-    url: "<?= base_url('/') ?>/dashboard/geral",
-    dataType: 'json',
+      success: function(response) {
+        drawChart(response)
+      }
+    })
 
-    success: function(response) {
-      drawChart(response)
+    function drawChart(response) {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Tipo de atividade', 'Total'],
+        ['Escalonamento Crise', response.total_escalonamento_crise],
+        ['Escalonamento Urgente', response.total_escalonamento_urgente],
+        ['Atualização Telegram', response.total_atualizacao_telegram],
+      ]);
+
+      var options = {
+        title: 'Atividades'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
     }
-  })
 
-  function drawChart(response) {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Tipo de atividade', 'Total'],
-      ['Escalonamento Crise', response.total_escalonamento_crise],
-      ['Escalonamento Urgente', response.total_escalonamento_urgente],
-      ['Atualização Telegram', response.total_atualizacao_telegram],
-    ]);
-
-    var options = {
-      title: 'Atividades'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    chart.draw(data, options);
-  }
-
-  $(window).resize(function() {
-    drawChart();
+    $(window).resize(function() {
+      drawChart();
+    });
   });
-});
-  
 </script>
 
 <?= $this->endSection() ?>
