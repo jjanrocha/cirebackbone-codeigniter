@@ -97,7 +97,7 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
       return
     }
 
-    drawChart(data_inicio_geral.value + ' 00:00:00', data_fim_geral.value + ' 23:59:59')
+    drawChart(data_inicio_geral.value, data_fim_geral.value)
 
   });
 
