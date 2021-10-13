@@ -24,25 +24,45 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
       </li>
     </ul>
 
+    <!-- Conteúdo das Abas -->
     <div class="tab-content">
 
+      <!-- Aba Geral -->
       <div class="tab-pane active" id="dashboard_geral" role="tabpanel" aria-labelledby="dashboard_geral-tab">
-        <!-- <i class="fas fa-redo mt-2" id="atualizar-grafico-geral" onclick="drawChart()" title="Atualizar"></i> -->
-        <div class="mt-2">
-          <button class="btn btn-secondary" onclick="drawChart()"><i class="fas fa-redo"></i> Atualizar</button>
-        </div>
-        <div id="piechart"></div>
-      </div>
 
+        <form method="POST" id="filtro_geral" class="form-inline">
+          <label class="my-1 mr-2" for="data_inicio_geral">Data Início:</label>
+          <input type="date" class="form-control my-1 mr-sm-2" name="data_inicio_geral" id="data_inicio_geral">
+          <label class="my-1 mr-2" for="data_fim_geral">Data Fim:</label>
+          <input type="date" class="form-control my-1 mr-sm-2" name="data_fim_geral" id="data_fim_geral">
+          <button type="submit" class="btn btn-secondary my-1"><i class="fas fa-filter"></i> Filtrar</button>
+        </form>
+
+        <input id="data_inicio_geral_atualizacao" hidden></input>
+        <input id="data_fim_geral_atualizacao" hidden></input>
+        <div class="mt-2">
+          <button class="btn btn-secondary" onclick="atualizarGraficoGeral()"><i class="fas fa-redo"></i> Atualizar</button>
+        </div>
+
+        <label id="label_filtro_geral"></label>
+        <br>
+        <label id="total_resultados"></label>
+
+        <div class="mt-2" id="piechart"></div>
+
+      </div> <!-- Fim aba Geral -->
+
+      <!-- Aba Operação -->
       <div class="tab-pane" id="dashboard_operacao" role="tabpanel" aria-labelledby="dashboard_operacao-tab">
         <p class="mt-2">Página em manutenção</p>
-      </div>
+      </div> <!-- Fim aba Geral -->
 
+      <!-- Aba Analistas -->
       <div class="tab-pane" id="dashboard_analistas" role="tabpanel" aria-labelledby="dashboard_analistas-tab">
         <p class="mt-2">Página em manutenção</p>
-      </div>
+      </div> <!-- Fim aba Analistas -->
 
-    </div>
+    </div> <!-- Fim do conteúdo das abas -->
 
   </div>
 </div>
@@ -60,12 +80,50 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
+  var form = document.getElementById('filtro_geral');
+  var data_inicio_geral = document.getElementById('data_inicio_geral');
+  var data_fim_geral = document.getElementById('data_fim_geral');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (data_inicio_geral.value == "" || data_fim_geral.value == "") {
+      alert('Tanto a data início quanto data fim devem ser definidas.')
+      return
+    }
+
+    if (data_inicio_geral.value > data_fim_geral.value) {
+      alert('A data inicial não pode ser maior que a final.')
+      return
+    }
+
+    drawChart(data_inicio_geral.value + ' 00:00:00', data_fim_geral.value + ' 23:59:59')
+
+  });
+
+  function atualizarGraficoGeral() {
+    var data_inicio_geral = $('#data_inicio_geral_atualizacao').val() != "" ? $('#data_inicio_geral_atualizacao').val() : '2021-01-01';
+    var data_fim_geral = $('#data_fim_geral_atualizacao').val() != "" ? $('#data_fim_geral_atualizacao').val() : '2021-21-31';
+
+    drawChart(data_inicio_geral, data_fim_geral)
+  }
+
+  function drawChart(data_inicio_geral, data_fim_geral) {
     var jsonData = $.ajax({
       type: "POST",
+      data: {
+        'data_inicio_geral': data_inicio_geral,
+        'data_fim_geral': data_fim_geral
+      },
       url: "<?= base_url('/') ?>/dashboard/geral",
       dataType: "json",
-      async: false
+      async: false,
+      success: function(response) {
+        $('#label_filtro_geral').html('Filtrado de: ' + response.data_inicio + ' a ' + response.data_fim + '.')
+        $('#total_resultados').html('Total de atividades no período: ' + response.total_atividades + '.')
+        $('#data_inicio_geral_atualizacao').val(response.data_inicio)
+        $('#data_fim_geral_atualizacao').val(response.data_fim)
+      }
     }).responseText;
 
     // Create our data table out of JSON data loaded from server.
@@ -74,6 +132,8 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(data, {
+      title: 'Atividades',
+      is3D: true,
       //width: 600,
       height: 400
     });
