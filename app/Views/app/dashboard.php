@@ -119,7 +119,7 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
       dataType: "json",
       async: false,
       success: function(response) {
-        $('#label_filtro_geral').html('Filtrado de: ' + response.data_inicio + ' a ' + response.data_fim + '.')
+        $('#label_filtro_geral').html('Filtrado de: ' + new Date(response.data_inicio + ' 00:00:00').toLocaleDateString('pt-br') + ' a ' + new Date(response.data_fim + ' 00:00:00').toLocaleDateString('pt-br') + '.')
         $('#total_resultados').html('Total de atividades no período: ' + response.total_atividades + '.')
         $('#data_inicio_geral_atualizacao').val(response.data_inicio)
         $('#data_fim_geral_atualizacao').val(response.data_fim)
