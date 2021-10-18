@@ -32,7 +32,11 @@ class Link extends Model
         'titulo' => [
             'required' => 'O campo título é de preenchimento obrigatório.',
             'min_length' => 'O campo título deve possuir no mínimo {param} caracteres.'
-        ]
+        ],
+        'titulo' => [
+            'required' => 'O campo link é de preenchimento obrigatório.',
+            'min_length' => 'O campo link deve possuir no mínimo {param} caracteres.'
+        ],
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
