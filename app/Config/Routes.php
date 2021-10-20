@@ -48,9 +48,7 @@ $routes->get('/carimbos/vivo2', function () {
     return view('fallback/manutencao');
 });
 $routes->get('/usuarios', 'UsuarioController::index', ['filter' => 'adminGuard']);
-$routes->get('/links', function () {
-    return view('fallback/manutencao');
-});
+$routes->get('/links', 'LinkController::index', ['filter' => 'authGuard']);
 /** Fim dos links da sidebar */
 
 /** Itens Dashboard */
