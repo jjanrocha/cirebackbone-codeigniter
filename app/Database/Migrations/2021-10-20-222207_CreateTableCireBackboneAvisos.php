@@ -25,6 +25,10 @@ class CreateTableCireBackboneAvisos extends Migration
             'descricao'          => [
                 'type' => 'TEXT',
             ],
+            'prioridade' => [
+                'type' => 'VARCHAR',
+                'constraint' => 5
+            ],
             'fixado' => [
                 'type' => 'VARCHAR',
                 'constraint' => 3,

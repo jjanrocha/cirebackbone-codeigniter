@@ -7,11 +7,13 @@ $this->section('title') ?> <?= $title ?> <?= $this->endSection() ?>
 
 <!-- Conteúdo -->
 <div class="main" id="pagina">
-
     <div class="container">
-        <p>Olá, <?= session()->get('nome') ?> </p>
-    </div>
 
+        <p>Olá, <?= session()->get('nome') ?> </p>
+
+        <h5>Avisos</h5>
+
+    </div>
 </div>
 
 <?= $this->include('layouts/footer') ?>

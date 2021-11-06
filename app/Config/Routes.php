@@ -82,6 +82,12 @@ $routes->put('/usuarios/(:num)', 'UsuarioController::update/$1', ['filter' => 'a
 $routes->delete('/usuarios/(:num)', 'UsuarioController::destroy/$1', ['filter' => 'adminGuard']);
 /** Fim do CRUD de usuários */
 
+/** CRUD de Links */
+$routes->post('/links/store', 'LinkController::store', ['filter' => 'adminGuard']);
+$routes->put('/links/(:num)', 'LinkController::update/$1', ['filter' => 'adminGuard']);
+$routes->delete('/links/(:num)', 'LinkController::destroy/$1', ['filter' => 'adminGuard']);
+/** Fim do CRUD de links */
+
 
 /*
  * --------------------------------------------------------------------
