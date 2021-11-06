@@ -18,10 +18,10 @@
                 <a><i class="fas fa-stamp sidebar-icon"></i> Carimbos <span class="arrow"><i class="fa fa-angle-down"></i></span></a>
             </li>
             <ul class="sub-menu collapse" id="carimbos">
-                <li><a href="<?php echo (base_url('/')) ?>/carimbos/b2b"><i class="fa fa-angle-right"></i> B2B <small><i class="fa fa-external-link"></i></small></a></li>
+                <!-- <li><a href="<?php echo (base_url('/')) ?>/carimbos/b2b"><i class="fa fa-angle-right"></i> B2B <small><i class="fa fa-external-link"></i></small></a></li> -->
                 <li><a href="<?php echo (base_url('/')) ?>/carimbos/controle"><i class="fa fa-angle-right"></i> Controle </a></li>
-                <li><a href="<?php echo (base_url('/')) ?>/carimbos/gerais"><i class="fa fa-angle-right"></i> Gerais <small><i class="fa fa-external-link"></i></small></a></li>
-                <li><a href="<?php echo (base_url('/')) ?>/carimbos/vivo2"><i class="fa fa-angle-right"></i> Vivo2 <small><i class="fa fa-external-link"></i></small></a></li>
+                <!-- <li><a href="<?php echo (base_url('/')) ?>/carimbos/gerais"><i class="fa fa-angle-right"></i> Gerais <small><i class="fa fa-external-link"></i></small></a></li> -->
+                <!-- <li><a href="<?php echo (base_url('/')) ?>/carimbos/vivo2"><i class="fa fa-angle-right"></i> Vivo2 <small><i class="fa fa-external-link"></i></small></a></li> -->
                 <li><a href="https://inmetacode.com.br/carimbo_swap/" target="blank"><i class="fa fa-angle-right"></i> SWAP <small><i class="fa fa-external-link"></i></small></a></li>
             </ul>
             <?php if (session()->get('nivel') == 'ADMINISTRADOR') : ?>
