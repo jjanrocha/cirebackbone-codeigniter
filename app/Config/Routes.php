@@ -36,17 +36,11 @@ $routes->post('/login', 'Login::logar');
 $routes->post('/logout', 'Login::logout');
 
 /** Links da sidebar */
-$routes->get('/carimbos/b2b', function () {
-    return view('fallback/manutencao');
-});
+//$routes->get('/carimbos/b2b', function () { return view('fallback/manutencao'); });
 $routes->get('/dashboard', 'DashboardController::index', ['filter' => 'adminGuard']);
 $routes->get('/carimbos/controle', 'ControleController::index', ['filter' => 'authGuard']);
-$routes->get('/carimbos/gerais', function () {
-    return view('fallback/manutencao');
-});
-$routes->get('/carimbos/vivo2', function () {
-    return view('fallback/manutencao');
-});
+//$routes->get('/carimbos/gerais', function () { return view('fallback/manutencao'); });
+//$routes->get('/carimbos/vivo2', function () { return view('fallback/manutencao'); });
 $routes->get('/usuarios', 'UsuarioController::index', ['filter' => 'adminGuard']);
 $routes->get('/links', 'LinkController::index', ['filter' => 'authGuard']);
 /** Fim dos links da sidebar */
@@ -87,6 +81,13 @@ $routes->post('/links/store', 'LinkController::store', ['filter' => 'adminGuard'
 $routes->put('/links/(:num)', 'LinkController::update/$1', ['filter' => 'adminGuard']);
 $routes->delete('/links/(:num)', 'LinkController::destroy/$1', ['filter' => 'adminGuard']);
 /** Fim do CRUD de links */
+
+/** CRUD de Avisos */
+$routes->post('/avisos/listar', 'AvisoController::index', ['filter' => 'authGuard']);
+$routes->post('/avisos/store', 'AvisoController::store', ['filter' => 'adminGuard']);
+$routes->put('/avisos/(:num)', 'AvisoController::update/$1', ['filter' => 'adminGuard']);
+$routes->delete('/avisos/(:num)', 'AvisoController::destroy/$1', ['filter' => 'adminGuard']);
+/** Fim do CRUD de Avisos */
 
 
 /*
